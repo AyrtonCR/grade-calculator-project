@@ -137,42 +137,69 @@ const gradeScale = [
 
 describe("getLetterGrade", () => {
   test.todo("Test happy path scenarios");
-
-  it("should return a letter as a string", () => {
-    const result = getLetterGrade("A+", 5, 98);
-    expect(typeof result === "string").toBe(true);
+  ////////////////////////////////////////////////////////////////////////////////
+  it("should return an array", () => {
+    const result = getLetterGrade(gradeScale, "Level 5", 98);
+    expect(Array.isArray(result)).toBe(true);
   });
 
-  it("should test that a mark is greater than or equal to the minMark, and less than or equal to the maxMark", () => {
-    const result = getLetterGrade([0], 5, 100);
-    expect(result).toBe("A+");
+  it("should test that the highest possible mark is an A+", () => {
+    const result = getLetterGrade(gradeScale, "Level 6", 100);
+    expect(result).toEqual(["A+"]);
+  });
+
+  it("should test that the lowest possible mark is an E", () => {
+    const result = getLetterGrade(gradeScale, "Level 6", 0);
+    expect(result).toEqual(["E"]);
   });
 
   it.each([
-    [gradeScale, "Level 5", 95],
-    [gradeScale, "Level 5", 87],
-    [gradeScale, "Level 5", 83],
-    [gradeScale, "Level 5", 77],
-    [gradeScale, "Level 5", 72],
-    [gradeScale, "Level 5", 67],
-    [gradeScale, "Level 5", 62],
-    [gradeScale, "Level 5", 57],
-    [gradeScale, "Level 5", 52],
-    [gradeScale, "Level 5", 45],
-    [gradeScale, "Level 5", 35],
-    [gradeScale, "Level 6", 95],
-    [gradeScale, "Level 6", 89],
-    [gradeScale, "Level 6", 82],
-    [gradeScale, "Level 6", 77],
-    [gradeScale, "Level 6", 72],
-    [gradeScale, "Level 6", 67],
-    [gradeScale, "Level 6", 62],
-    [gradeScale, "Level 6", 57],
-    [gradeScale, "Level 6", 52],
-    [gradeScale, "Level 6", 45],
-    [gradeScale, "Level 6", 35],
+    [gradeScale, "Level 5", 100],
+    [gradeScale, "Level 5", 90],
+    [gradeScale, "Level 5", 89],
+    [gradeScale, "Level 5", 85],
+    [gradeScale, "Level 5", 84],
+    [gradeScale, "Level 5", 80],
+    [gradeScale, "Level 5", 79],
+    [gradeScale, "Level 5", 75],
+    [gradeScale, "Level 5", 74],
+    [gradeScale, "Level 5", 70],
+    [gradeScale, "Level 5", 69],
+    [gradeScale, "Level 5", 65],
+    [gradeScale, "Level 5", 64],
+    [gradeScale, "Level 5", 60],
+    [gradeScale, "Level 5", 59],
+    [gradeScale, "Level 5", 55],
+    [gradeScale, "Level 5", 54],
+    [gradeScale, "Level 5", 50],
+    [gradeScale, "Level 5", 49],
+    [gradeScale, "Level 5", 40],
+    [gradeScale, "Level 5", 39],
+    [gradeScale, "Level 5", 0],
+    [gradeScale, "Level 6", 100],
+    [gradeScale, "Level 6", 92],
+    [gradeScale, "Level 6", 91],
+    [gradeScale, "Level 6", 85],
+    [gradeScale, "Level 6", 84],
+    [gradeScale, "Level 6", 80],
+    [gradeScale, "Level 6", 79],
+    [gradeScale, "Level 6", 75],
+    [gradeScale, "Level 6", 74],
+    [gradeScale, "Level 6", 70],
+    [gradeScale, "Level 6", 69],
+    [gradeScale, "Level 6", 65],
+    [gradeScale, "Level 6", 64],
+    [gradeScale, "Level 6", 60],
+    [gradeScale, "Level 6", 59],
+    [gradeScale, "Level 6", 55],
+    [gradeScale, "Level 6", 54],
+    [gradeScale, "Level 6", 50],
+    [gradeScale, "Level 6", 49],
+    [gradeScale, "Level 6", 40],
+    [gradeScale, "Level 6", 39],
+    [gradeScale, "Level 6", 0],
   ])(
-    "should return a the correct 'Grade' when a valid 'Level' and a valid 'Mark' are entered",
+    "should return the correct 'Grade' when a valid 'Level' and a valid 'Mark' are entered by testing the start and end points of each grade bracket",
     (gradeScale, level, mark) => {
       const result = getLetterGrade(gradeScale, level, mark);
       const expectedResult = gradeScale.filter(
@@ -186,6 +213,7 @@ describe("getLetterGrade", () => {
   );
 
   test.todo("Test negative scenarios");
+  /////////////////////////////////////////////////////////////////////////////////////////////
 
   it("Throws an error for invalid gradeScale", () => {
     const corruptGradeScale = {};
@@ -196,9 +224,42 @@ describe("getLetterGrade", () => {
     );
   });
 
-  it("should return an error message when invalid data type is used in input", () => {
-    expect(() => getLetterGrade(4, "blah", "blah")).toThrow(
-      "Invalid input: Input must be a valid gradeScale, mark and level"
-    );
+  it("should return an error message when invalid data is placed in the Level input", () => {
+    const testMark = 4;
+    const testLevel = "Level 27";
+    const result = getLetterGrade(gradeScale, testLevel, testMark);
+    expect(result).toBe("Level must only be either Level 5 or Level 6");
   });
+
+  it("should return an error message when an invalid value is placed in the Mark input", () => {
+    const testMark = 102;
+    const testLevel = "Level 5";
+    const result = getLetterGrade(gradeScale, testLevel, testMark);
+    expect(result).toBe("Mark must be valid: Between 0 and 100");
+  });
+
+  it("should return an error message when an empty object is placed in the Mark input", () => {
+    const testMark = {};
+    const testLevel = "Level 5";
+    const result = getLetterGrade(gradeScale, testLevel, testMark);
+    expect(result).toBe("Mark must be valid: Between 0 and 100");
+  });
+
+  it("should return an error message when a string is placed in the Mark input", () => {
+    const testMark = "This is a string";
+    const testLevel = "Level 5";
+    const result = getLetterGrade(gradeScale, testLevel, testMark);
+    expect(result).toBe("Mark must be valid: Between 0 and 100");
+  });
+
+  // it("should check that the Grade is a valid Grade", () => {
+  //   const testMark = 99;
+  //   const testLevel = "Level 5";
+  //   const result = getLetterGrade(gradeScale, testLevel, testMark);
+  //   expect(result).toEqual(
+  //     ["A+"] || ["A"] || ["A-"] || ["B+"] || ["B"] || ["B-"] || ["C+"] || [
+  //         "C",
+  //       ] || ["C-"] || ["D"] || ["E"]
+  //   );
+  // });
 });
