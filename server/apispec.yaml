@@ -1,10 +1,17 @@
-openapi: "3.0.2"
+openapi: 3.0.2
 info:
-  version: "1.0"
+  version: '1.0'
   title: Welcome to the Grade Scale API!
   description: This API allows users to view the grade scale
+  contact:
+    email: ayrton.campbell-reinheimer@developersinstitute.co.nz
+    name: Ayrton Campbell
+    url: 'https://testurl.co.nz'
+  license:
+    name: MIT
+    url: 'https://testurl.co.nz'
 servers:
-  - url: "http://localhost:5001/api"
+  - url: 'http://localhost:5001/api'
     description: Development server
 paths:
   /grade-scale:
@@ -14,29 +21,56 @@ paths:
       operationId: get-grade-scale
       tags:
         - grade-scale
-      
       responses:
-        200:
+        '200':
           description: OK
           content:
             application/json:
               schema:
-                type: object
-        500:
+                $ref: '#/components/schemas/Grade'
+              examples:
+                example-1:
+                  value:
+                    - level: Level 5
+                      min_mark: 90
+                      max_mark: 100
+                      grade: A+
+        '500':
           description: Internal Server Error
           content:
             application/json:
               schema:
-                $ref: "#/components/schemas/Error"
+                $ref: '#/components/schemas/Error'
+              examples:
+                example-1:
+                  value:
+                    error: Internal server error
 components:
   schemas:
     Grade:
-      type: object
-      properties:
-        level:
-          type: string
-      required:
-        - level
+      type: array
+      x-examples:
+        example-1:
+          level: Level 5
+          min_mark: 90
+          max_mark: 100
+          grade: A+
+      items:
+        type: object
+        properties:
+          level:
+            type: string
+          min_mark:
+            type: number
+          max_mark:
+            type: number
+          grade:
+            type: string
+        required:
+          - level
+          - min_mark
+          - max_mark
+          - grade
     Error:
       type: object
       properties:
@@ -44,3 +78,4 @@ components:
           type: string
 tags:
   - name: grade-scale
+    description: this is a description
