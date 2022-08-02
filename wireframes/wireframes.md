@@ -2,4 +2,4 @@
 
 <!-- TODO: Add wireframe -->
 
-![img](./wireframe.jpg)
+![img](./grade_calculator_wireframe.png)

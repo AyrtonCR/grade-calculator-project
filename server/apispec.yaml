@@ -73,6 +73,9 @@ components:
           - grade
     Error:
       type: object
+      x-examples:
+        example-1:
+          '500': Internal Server Error
       properties:
         message:
           type: string
