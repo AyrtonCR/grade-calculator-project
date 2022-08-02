@@ -138,19 +138,19 @@ const gradeScale = [
 describe("getLetterGrade", () => {
   test.todo("Test happy path scenarios");
   ////////////////////////////////////////////////////////////////////////////////
-  it("should return an array", () => {
+  it("should return a string", () => {
     const result = getLetterGrade(gradeScale, "Level 5", 98);
-    expect(Array.isArray(result)).toBe(true);
+    expect(typeof result === "string").toBe(true);
   });
 
   it("should test that the highest possible mark is an A+", () => {
     const result = getLetterGrade(gradeScale, "Level 6", 100);
-    expect(result).toEqual(["A+"]);
+    expect(result).toEqual("A+");
   });
 
   it("should test that the lowest possible mark is an E", () => {
     const result = getLetterGrade(gradeScale, "Level 6", 0);
-    expect(result).toEqual(["E"]);
+    expect(result).toEqual("E");
   });
 
   it.each([
@@ -208,7 +208,9 @@ describe("getLetterGrade", () => {
           mark >= singleGrade.minMark &&
           mark <= singleGrade.maxMark
       );
-      expect(result).toEqual(expectedResult.map((newGrade) => newGrade.grade));
+      expect(result).toEqual(
+        expectedResult.map((newGrade) => newGrade.grade).toString()
+      );
     }
   );
 
@@ -227,39 +229,33 @@ describe("getLetterGrade", () => {
   it("should return an error message when invalid data is placed in the Level input", () => {
     const testMark = 4;
     const testLevel = "Level 27";
-    const result = getLetterGrade(gradeScale, testLevel, testMark);
-    expect(result).toBe("Level must only be either Level 5 or Level 6");
+    expect(() => getLetterGrade(gradeScale, testLevel, testMark)).toThrow(
+      "Level must only be either Level 5 or Level 6"
+    );
   });
 
   it("should return an error message when an invalid value is placed in the Mark input", () => {
     const testMark = 102;
     const testLevel = "Level 5";
-    const result = getLetterGrade(gradeScale, testLevel, testMark);
-    expect(result).toBe("Mark must be valid: Between 0 and 100");
+    expect(() => getLetterGrade(gradeScale, testLevel, testMark)).toThrow(
+      "Mark must be valid: A Number between 0 and 100"
+    );
   });
 
   it("should return an error message when an empty object is placed in the Mark input", () => {
     const testMark = {};
     const testLevel = "Level 5";
-    const result = getLetterGrade(gradeScale, testLevel, testMark);
-    expect(result).toBe("Mark must be valid: Between 0 and 100");
+    expect(() => getLetterGrade(gradeScale, testLevel, testMark)).toThrow(
+      "Mark must be valid: A Number between 0 and 100"
+    );
+    // expect(result).toBe("Mark must be valid: Between 0 and 100");
   });
 
   it("should return an error message when a string is placed in the Mark input", () => {
     const testMark = "This is a string";
     const testLevel = "Level 5";
-    const result = getLetterGrade(gradeScale, testLevel, testMark);
-    expect(result).toBe("Mark must be valid: Between 0 and 100");
+    expect(() => getLetterGrade(gradeScale, testLevel, testMark)).toThrow(
+      "Mark must be valid: A Number between 0 and 100"
+    );
   });
-
-  // it("should check that the Grade is a valid Grade", () => {
-  //   const testMark = 99;
-  //   const testLevel = "Level 5";
-  //   const result = getLetterGrade(gradeScale, testLevel, testMark);
-  //   expect(result).toEqual(
-  //     ["A+"] || ["A"] || ["A-"] || ["B+"] || ["B"] || ["B-"] || ["C+"] || [
-  //         "C",
-  //       ] || ["C-"] || ["D"] || ["E"]
-  //   );
-  // });
 });
