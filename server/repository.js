@@ -6,10 +6,10 @@ module.exports = {
     try {
       const result = await Pool.query(
     `SELECT 
-       level AS "Level", 
+       level AS "level", 
        min_mark AS "minMark",
        max_mark AS "maxMark",
-       grade AS "Grade",
+       grade AS "grade",
     FROM grade_scale`
       );
       return result.rows;

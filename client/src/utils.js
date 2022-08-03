@@ -1,4 +1,4 @@
-const getLetterGrade = (gradeScale, level, mark) => {
+const getLetterGrade = (gradeScale, mark, level) => {
   if (!Array.isArray(gradeScale) || !gradeScale.length) {
     throw new Error("Grade scale not provided.");
   }
@@ -10,8 +10,8 @@ const getLetterGrade = (gradeScale, level, mark) => {
           mark >= singleGrade.minMark &&
           mark <= singleGrade.maxMark
       );
-      const result = filterFunction.map((newGrade) => newGrade.grade);
-      return result.toString();
+      const grade = filterFunction.map((newGrade) => newGrade.grade).toString();
+      return grade;
     } else {
       throw new Error("Mark must be valid: A Number between 0 and 100");
     }
@@ -19,5 +19,7 @@ const getLetterGrade = (gradeScale, level, mark) => {
     throw new Error("Level must only be either Level 5 or Level 6");
   }
 };
+
+
 
 module.exports = { getLetterGrade };

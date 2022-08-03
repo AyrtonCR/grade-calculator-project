@@ -6,10 +6,10 @@ router.get("/", async (req, res, next) => {
   try {
     const result = await db.query(
       `SELECT
-        level AS "Level",
+        level AS "level",
         min_mark AS "minMark",
         max_mark AS "maxMark",
-        grade AS "Grade"
+        grade AS "grade"
       FROM grade_scale 
       ORDER BY
         id

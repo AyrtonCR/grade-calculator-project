@@ -1,0 +1,9 @@
+.header {
+  text-align: center;
+}
+
+.gradeTitle {
+  border: 0.1rem solid black;
+  padding: 1rem;
+  box-shadow: 0.1rem 0.1rem 0.1rem;
+}

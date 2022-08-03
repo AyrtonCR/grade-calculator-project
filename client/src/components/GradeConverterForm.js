@@ -22,14 +22,13 @@ const GradeConverterForm = ({ gradeScale }) => {
 
   return (
     <>
-      {errorMessage && <ErrorMessage message={errorMessage} />}
-      {grade && (
-        <p>
-          The grade for mark {mark} at {level} is {grade}.
-        </p>
-      )}
+      <div>
+        <h2 className={styles.instruction}>
+          Enter the students Level and Mark below ...
+        </h2>
+      </div>
       <form className={styles.mainForm} onSubmit={handleSubmit}>
-        <label htmlFor="level">Level</label>
+        <label htmlFor="level">Level </label>
         <select
           className={styles.mainFormSelect}
           id="level"
@@ -39,10 +38,10 @@ const GradeConverterForm = ({ gradeScale }) => {
             setLevel(e.target.value);
           }}
         >
-          <option value="Level 5">Level 5</option>
-          <option value="Level 6">Level 6</option>
+          <option value="Level 5">5</option>
+          <option value="Level 6">6</option>
         </select>
-        <label htmlFor="mark">Mark</label>
+        <label htmlFor="mark"> Mark </label>
         <input
           className={styles.mainFormNumber}
           id="mark"
@@ -53,7 +52,21 @@ const GradeConverterForm = ({ gradeScale }) => {
             setMark(Number(e.target.value));
           }}
         />
-        <button className={styles.mainFormButton}>Get Grade</button>
+        <div className={styles.buttonContainer}>
+          <button className={styles.mainFormButton}>Get Grade</button>
+        </div>
+        {errorMessage && (
+          <ErrorMessage className={styles.errorClass} message={errorMessage} />
+        )}
+
+        {grade && (
+          <div className={styles.gradeResultContainer}>
+            <p className={styles.gradeResult}>
+              This {level} student with a Mark of {mark} will achieve a Grade of{" "}
+              {grade}.
+            </p>{" "}
+          </div>
+        )}
       </form>
     </>
   );

@@ -1,6 +1,26 @@
 .app {
-  max-width: 800px;
   padding-left: 2rem;
   padding-right: 2rem;
   box-sizing: content-box;
+}
+
+@media screen and (min-width: 40rem) {
+  .app {
+    padding-left: 6rem;
+    padding-right: 6rem;
+  }
+}
+
+@media screen and (min-width: 60rem) {
+  .app {
+    padding-left: 10rem;
+    padding-right: 10rem;
+  }
+}
+
+@media screen and (min-width: 70rem) {
+  .app {
+    padding-left: 20rem;
+    padding-right: 20rem;
+  }
 }

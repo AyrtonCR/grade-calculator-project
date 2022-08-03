@@ -3,3 +3,41 @@
 .mainFormButton {
   font-family: "Righteous", sans-serif;
 }
+
+.mainFormNumber,
+.mainFormSelect {
+  width: 2.5rem;
+}
+
+.buttonContainer {
+  text-align: center;
+  margin-top: 0.5rem;
+}
+
+.mainForm {
+  text-align: center;
+  margin-top: 2rem;
+}
+
+.gradeResult {
+  display: grid;
+  text-align: center;
+  margin-top: 2rem;
+  padding: 0.5rem;
+  border: 0.1rem solid rgb(6, 209, 6);
+  color: rgb(6, 209, 6);
+}
+
+.errorMessage {
+  margin-top: 2rem;
+}
+
+.instruction {
+  font-size: 1rem;
+  font-weight: 500;
+  text-align: center;
+}
+
+.gradeResultContainer {
+  text-align: center;
+}
