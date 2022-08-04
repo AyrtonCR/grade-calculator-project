@@ -2,9 +2,11 @@ import styles from "./Header.module.css";
 
 const Header = () => {
   return (
-    <header className={styles.header}>
-      <h1 className={styles.gradeTitle}>Grade Calculator</h1>
-    </header>
+    <div className={styles.headerContainer}>
+      <header className={styles.header}>
+        <h1 className={styles.gradeTitle}>Grade Calculator</h1>
+      </header>
+    </div>
   );
 };
 
