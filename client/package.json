@@ -27,7 +27,7 @@
     "test:watch": "react-scripts test --verbose --watchAll",
     "eject": "react-scripts eject",
     "prettier:check": "prettier --check '**/*.js'",
-    "lint:js": "eslint."
+    "lint:js": "eslint ."
   },
   "eslintConfig": {
     "extends": [
