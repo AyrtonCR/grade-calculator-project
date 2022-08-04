@@ -137,18 +137,17 @@ const gradeScale = [
 
 describe("getLetterGrade", () => {
   test.todo("Test happy path scenarios");
-  ////////////////////////////////////////////////////////////////////////////////
-  it("should return a string", () => {
+  it("should check that when the getLetterGrade function is run, it will return an item from the array that has been converted to a string", () => {
     const result = getLetterGrade(gradeScale, 98, "Level 5");
     expect(typeof result === "string").toBe(true);
   });
 
-  it("should test that the highest possible mark is an A+", () => {
+  it("should check that when the getLetterGrade function is run with a Mark of 100 at Level 6 which is the highest possible score, an A+ is returned", () => {
     const result = getLetterGrade(gradeScale, 100, "Level 6");
     expect(result).toEqual("A+");
   });
 
-  it("should test that the lowest possible mark is an E", () => {
+  it("should check that when the getLetterGrade function is run with a Mark of 0 at Level 6 which is the lowest possible score, an E is returned", () => {
     const result = getLetterGrade(gradeScale, 0, "Level 6");
     expect(result).toEqual("E");
   });
@@ -199,7 +198,7 @@ describe("getLetterGrade", () => {
     [gradeScale, 39, "Level 6"],
     [gradeScale, 0, "Level 6"],
   ])(
-    "should return the correct 'Grade' when a valid 'Level' and a valid 'Mark' are entered by testing the start and end points of each grade bracket",
+    "should check that when the getLetterGrade function is run, it will return the correct 'Grade' when a valid 'Level' and a valid 'Mark' are entered by testing the start and end points of each grade bracket, and checking them against the test grade scale. It should return a grade correctly formatted as a string and not an array",
     (gradeScale, mark, level) => {
       const result = getLetterGrade(gradeScale, mark, level);
       const expectedResult = gradeScale.filter(
@@ -215,9 +214,7 @@ describe("getLetterGrade", () => {
   );
 
   test.todo("Test negative scenarios");
-  /////////////////////////////////////////////////////////////////////////////////////////////
-
-  it("Throws an error for invalid gradeScale", () => {
+  it("should check that when the getLetterGrade function is run with an empty object as the gradeScale, it will throw an error that says Grade scale not provided", () => {
     const corruptGradeScale = {};
     const mark = 70;
     const level = "Level 5";
@@ -226,7 +223,7 @@ describe("getLetterGrade", () => {
     );
   });
 
-  it("should return an error message when invalid data is placed in the Level input", () => {
+  it("should check that when the getLetterGrade function is run with a Level that is not Level 5 or Level 6, an error message is returned that says Level must only be either Level 5 or Level 6", () => {
     const testMark = 4;
     const testLevel = "Level 27";
     expect(() => getLetterGrade(gradeScale, testMark, testLevel)).toThrow(
@@ -234,7 +231,31 @@ describe("getLetterGrade", () => {
     );
   });
 
-  it("should return an error message when an invalid value is placed in the Mark input", () => {
+  it("should check that when the getLetterGrade function is run with an empty object as the level, an error message is returned that says Level must only be either Level 5 or Level 6", () => {
+    const testMark = 4;
+    const testLevel = {};
+    expect(() => getLetterGrade(gradeScale, testMark, testLevel)).toThrow(
+      "Level must only be either Level 5 or Level 6"
+    );
+  });
+
+  it("should check that when the getLetterGrade function is run with a number as a string inputted for the Level, an error message is returned that says Level must only be either Level 5 or Level 6", () => {
+    const testMark = 4;
+    const testLevel = "5";
+    expect(() => getLetterGrade(gradeScale, testMark, testLevel)).toThrow(
+      "Level must only be either Level 5 or Level 6"
+    );
+  });
+
+  it("should check that when the getLetterGrade function is run with just a number inputted for the Level, an error message is returned that says Level must only be either Level 5 or Level 6", () => {
+    const testMark = 4;
+    const testLevel = 5;
+    expect(() => getLetterGrade(gradeScale, testMark, testLevel)).toThrow(
+      "Level must only be either Level 5 or Level 6"
+    );
+  });
+
+  it("should check that when the getLetterGrade function is run with a mark that is greater than 100, an error message is returned that says Mark must be valid: A Number between 0 and 100", () => {
     const testMark = 102;
     const testLevel = "Level 5";
     expect(() => getLetterGrade(gradeScale, testMark, testLevel)).toThrow(
@@ -242,16 +263,23 @@ describe("getLetterGrade", () => {
     );
   });
 
-  it("should return an error message when an empty object is placed in the Mark input", () => {
+  it("should check that when the getLetterGrade function is run with a mark that is less than than 0, an error message is returned that says Mark must be valid: A Number between 0 and 100", () => {
+    const testMark = -54;
+    const testLevel = "Level 5";
+    expect(() => getLetterGrade(gradeScale, testMark, testLevel)).toThrow(
+      "Mark must be valid: A Number between 0 and 100"
+    );
+  });
+
+  it("should check that when the getLetterGrade function is run with an empty object inputted for the mark, it will return an error message that says Mark must be valid: A Number between 0 and 100", () => {
     const testMark = {};
     const testLevel = "Level 5";
     expect(() => getLetterGrade(gradeScale, testMark, testLevel)).toThrow(
       "Mark must be valid: A Number between 0 and 100"
     );
-    // expect(result).toBe("Mark must be valid: Between 0 and 100");
   });
 
-  it("should return an error message when a string is placed in the Mark input", () => {
+  it("should check that when the getLetterGrade function is run with a string inputted for the mark, it will return an error message that says Mark must be valid: A Number between 0 and 100", () => {
     const testMark = "This is a string";
     const testLevel = "Level 5";
     expect(() => getLetterGrade(gradeScale, testMark, testLevel)).toThrow(
