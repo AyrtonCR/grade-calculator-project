@@ -20,6 +20,4 @@ const getLetterGrade = (gradeScale, mark, level) => {
   }
 };
 
-
-
 module.exports = { getLetterGrade };
