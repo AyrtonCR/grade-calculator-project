@@ -6,11 +6,12 @@ module.exports = {
     try {
       const result = await db.query(
         `SELECT 
-       level AS "level", 
+       level, 
        min_mark AS "minMark",
        max_mark AS "maxMark",
-       grade AS "grade",
-    FROM grade_scale`
+       grade,
+    FROM grade_scale
+    ORDER BY id`
       );
       return result.rows;
     } catch (error) {
