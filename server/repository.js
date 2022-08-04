@@ -9,7 +9,7 @@ module.exports = {
        level, 
        min_mark AS "minMark",
        max_mark AS "maxMark",
-       grade,
+       grade
     FROM grade_scale
     ORDER BY id`
       );
